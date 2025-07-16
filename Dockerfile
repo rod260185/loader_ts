@@ -1,10 +1,29 @@
-FROM opensuse/tumbleweed
+# Base com CUDA 12.9 no Ubuntu 24.04
+FROM nvidia/cuda:12.9.0-devel-ubuntu24.04
+
+# Informações sobre o autor/opcional
+LABEL maintainer="rodrigo.domingues@lps.ufrj.br"
+
+# Evitar prompts interativos
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instalar dependências básicas e Python pip
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      python3 python3-pip python3-dev build-essential \
+ && rm -rf /var/lib/apt/lists/*
+
+# Instalar PyTorch 2.7 com CUDA 12.9 via pip
+RUN pip3 install --no-cache-dir \
+    torch==2.7.0a0+79aa17489c --index-url https://download.pytorch.org/whl/cu129 \
+    torchvision torchaudio
 
 COPY requirements.txt /
 
-RUN zypper in -y python311 python311-virtualenv git
-RUN python3.11 -m venv ts
-#COPY *.pem /etc/pki/trust/anchors/
-#RUN update-ca-certificates
-RUN source /ts/bin/activate && pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org -r requirements.txt
-RUN source /ts/bin/activate && pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org torch
+RUN pip install -r requirements.txt
+
+CMD /bin/bash
+
+
+
+
