@@ -1,1 +1,1 @@
-docker run -it --rm -v /3W-main:/3W -v loader_ts:/loader_ts loader_ts:latest
+$ct_tool run -it --rm -v /3W-main:/3W -v loader_ts:/loader_ts loader_ts:latest

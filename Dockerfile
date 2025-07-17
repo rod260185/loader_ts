@@ -1,5 +1,5 @@
 # Base com CUDA 12.9 no Ubuntu 24.04
-FROM nvidia/cuda:12.9.0-devel-ubuntu24.04
+FROM nvidia/cuda:12.9.1-cudnn-devel-ubuntu24.04
 
 # Informações sobre o autor/opcional
 LABEL maintainer="rodrigo.domingues@lps.ufrj.br"

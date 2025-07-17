@@ -1,1 +1,1 @@
-docker build -t loader_ts:latest .
+$ct_tool build -t loader_ts:latest .

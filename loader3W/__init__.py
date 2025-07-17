@@ -4,7 +4,7 @@ sys.path.append('/3W')
 import toolkit as tk
 
 
-class LoaderTS(object):
+class Loader3W(object):
     def __init__(self):
         self.real_instances, self.simulated_instances, self.drawn_instances = tk.get_all_labels_and_files()
 
@@ -19,7 +19,5 @@ class LoaderTS(object):
     
 
 if __name__ == "__main__":
-    loader = LoaderTS()
+    loader = Loader3W()
     print("Real Instances:", loader.load_real_instance())
-
-    
