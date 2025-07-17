@@ -10,17 +10,17 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Instalar dependências básicas e Python pip
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-      python3 python3-pip python3-dev build-essential \
+      python3 python3-pip python3-dev python3-venv build-essential \
  && rm -rf /var/lib/apt/lists/*
 
 # Instalar PyTorch 2.7 com CUDA 12.9 via pip
-RUN pip3 install --no-cache-dir \
-    torch==2.7.0a0+79aa17489c --index-url https://download.pytorch.org/whl/cu129 \
-    torchvision torchaudio
+RUN python3 -m venv /venv
+RUN /venv/bin/pip install --no-cache-dir \
+    torch
 
 COPY requirements.txt /
 
-RUN pip install -r requirements.txt
+RUN /venv/bin/pip install -r requirements.txt
 
 CMD /bin/bash
 
